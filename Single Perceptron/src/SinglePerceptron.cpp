@@ -1,10 +1,6 @@
 #include "SinglePerceptron.h"
 
 SinglePerceptron::SinglePerceptron() {
-	// vectorはresizeなどで, 大きさ指定しないと配列のような代入は不具合を起こす.
-	in.resize(2);
-	w.resize(2);
-
 	// 乱数生成器 [-1.0, 1.0)
 	std::random_device rnd;
 	std::mt19937_64 mt(rnd());
@@ -29,7 +25,7 @@ SinglePerceptron::~SinglePerceptron() {
 
 void SinglePerceptron::learn() {
 	// ランダムに決まる数(w, theta)次第ではループに入らない可能性もあるため, ループ前に一度正答率を計算する.
-	p = calc_p(w[0], w[1]);
+	p = calc_p(w);
 
 	w_log.push_back(w);
 	theta_log.push_back(theta);
@@ -52,7 +48,7 @@ void SinglePerceptron::learn() {
 				w[1] = w[1] - alpha * delta * in[1];
 				theta = theta + alpha * delta;
 
-				p = calc_p(w[0], w[1]);
+				p = calc_p(w);
 
 				w_log.push_back(w);
 				theta_log.push_back(theta);
@@ -66,20 +62,19 @@ void SinglePerceptron::learn() {
 	}
 }
 
-// SinglePerceptronクラスのメンバ変数, w[]が意図せず操作されるのを嫌うため, 引数として渡す.
+// SinglePerceptronクラスのメンバ変数, wが意図せず操作されるのを嫌うため, 引数として渡す.
 // private関数では, pもそうだがなるだけ一時的な変数を介して渡すようにした. (ソフトウェア工学的に有意なことかはわからない…)
-double SinglePerceptron::calc_p(double w0, double w1) {
+double SinglePerceptron::calc_p(Eigen::Vector2d tmp_w) {
 	int correctCount = 0;
 
 	for (int i = 0; i < Teach_in.size(); i++) {
-		std::vector<double> tmp_in;
-		tmp_in.resize(2);
+		Eigen::Vector2d tmp_in;
 		double tmp_out;
 
 		tmp_in[0] = Teach_in[i][0];
 		tmp_in[1] = Teach_in[i][1];
 
-		double _tmp_out = tmp_in[0] * w0 + tmp_in[1] * w1 - theta;
+		double _tmp_out = tmp_in[0] * tmp_w[0] + tmp_in[1] * tmp_w[1] - theta;
 		if (_tmp_out >= 0) tmp_out = 1;
 		else tmp_out = 0;
 

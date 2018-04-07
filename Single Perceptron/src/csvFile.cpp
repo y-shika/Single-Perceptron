@@ -61,7 +61,7 @@ void csvFile::split(std::string& line) {
 	}
 }
 
-void csvFile::write(std::vector<std::vector<double>> w_log, std::vector<double> theta_log, std::vector<double> p_log) {
+void csvFile::write(std::vector<Eigen::Vector2d> w_log, std::vector<double> theta_log, std::vector<double> p_log) {
 	std::ofstream outputFile(outputFileName);
 	outputFile << "w_log[0], w_log[1], theta_log, p_log" << std::endl;
 

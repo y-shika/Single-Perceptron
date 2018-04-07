@@ -8,19 +8,19 @@
 class SinglePerceptron : public csvFile
 {
 private:
-	std::vector<double> in;
+	Eigen::Vector2d in;
 	double out;
-	std::vector<double> w;
+	Eigen::Vector2d w;
 
 	double theta;
 	double alpha;
 	double delta;
 	double p;
 
-	double calc_p(double w0, double w1);
+	double calc_p(Eigen::Vector2d tmp_w);
 
 public:
-	std::vector<std::vector<double>> w_log;
+	std::vector<Eigen::Vector2d> w_log;
 	std::vector<double> theta_log;
 	std::vector<double> p_log;
 

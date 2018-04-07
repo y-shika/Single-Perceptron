@@ -25,7 +25,7 @@ public:
 	//~csvFile();
 
 	void read();
-	void write(std::vector<std::vector<double>> w_log, std::vector<double> theta_log, std::vector<double> p_log);
+	void write(std::vector<Eigen::Vector2d> w_log, std::vector<double> theta_log, std::vector<double> p_log);
 };
 
 #endif
