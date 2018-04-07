@@ -1,8 +1,9 @@
 #include "csvFile.h"
 
 csvFile::csvFile() {
-	inputFileName = "教師信号.csv";
-	outputFileName = "DataLog.csv";
+	// 相対パスで指定している. "data"フォルダにcsvファイルを置いておく.
+	inputFileName = "data\\教師信号.csv";
+	outputFileName = "data\\DataLog.csv";
 }
 
 void csvFile::read() {
