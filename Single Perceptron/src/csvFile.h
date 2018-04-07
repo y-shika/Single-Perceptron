@@ -1,6 +1,8 @@
 #ifndef __CSVFILE_H_INCLUDED__
 #define __CSVFILE_H_INCLUDED__
 
+#include <Eigen\Eigen>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,7 +18,7 @@ private:
 	void split(std::string& line);
 
 public:
-	std::vector<std::vector<double>> Teach_in;
+	std::vector<Eigen::Vector2d> Teach_in;
 	std::vector<double> Teach_out;
 
 	csvFile();

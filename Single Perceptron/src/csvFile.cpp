@@ -34,18 +34,18 @@ void csvFile::split(std::string& line) {
 	std::istringstream lineStream(line);
 
 	int inoutCount = 0;
-	std::vector<double> inData;
+	Eigen::Vector2d inData;
 	std::string field;
 	while (getline(lineStream, field, ',')) {
 		switch (inoutCount)
 		{
 		case 0:
-			inData.push_back(std::stod(field));
+			inData[0] = std::stod(field);
 			inoutCount++;
 			break;
 
 		case 1:
-			inData.push_back(std::stod(field));
+			inData[1] = std::stod(field);
 			Teach_in.push_back(inData);
 			inoutCount++;
 			break;
